@@ -1,4 +1,4 @@
-from conexion import crear_proceso_y_palillo
+from crear_palillo_proceso import crear_proceso_y_palillo
 
 crear_proceso_y_palillo()
 crear_proceso_y_palillo()

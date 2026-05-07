@@ -11,14 +11,14 @@
 #define DEVICE_GIIROB_PR2_ID      "08" //"giirobpr2_00"
 
 // WIFI
-#define NET_SSID                  "DIGIFIBRA-xTAZ"
-#define NET_PASSWD                "dN5YQUPhCzyd"
+#define NET_SSID                  "UPV-PSK"
+#define NET_PASSWD                "giirob-pr2-2023"
 
 // MQTT
-#define MQTT_SERVER_IP            "broker.emqx.io"
+#define MQTT_SERVER_IP            "mqtt.dsic.upv.es"
 #define MQTT_SERVER_PORT           1883
-//#define MQTT_USERNAME             "giirob"    // Descomentar esta línea (y la siguiente) para que se conecte al broker MQTT usando usuario y contraseña
-//#define MQTT_PASSWORD             "UPV2024"
+#define MQTT_USERNAME             "giirob"    // Descomentar esta línea (y la siguiente) para que se conecte al broker MQTT usando usuario y contraseña
+#define MQTT_PASSWORD             "UPV2024"
 
 #define TOPIC_SUB_LCD               "giirob/pr2/devices/input/lcd"   // topic para leer el texto que le llega a la lcd
 #define TOPIC_SUB_LED               "giirob/pr2/devices/input/led"   // topic para leer el texto que le llega a los leds

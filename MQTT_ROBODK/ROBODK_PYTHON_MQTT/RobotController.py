@@ -25,3 +25,8 @@ def handle_message(mqttc, topic, payload):
         elif payload == "INICIAR":
             print ("Reanudando operaciones...")
             RDK.setParam("STOP", 0)   # Reanuda la estación técnica
+        else:
+            print ("Comando no reconocido.")
+            mqtt_listener.publicar_lcd("Comando no reconocido.")
+
+

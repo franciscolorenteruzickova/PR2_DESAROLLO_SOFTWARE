@@ -1,10 +1,3 @@
-Buffer_String buffer_LED;
-Buffer_String buffer_LCD;
-Buffer_String buffer_TX;
-
-volatile bool PARAR = false;
-
-LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 bool put_item(Buffer_String *b, String item){
   portENTER_CRITICAL(&b->mux);
@@ -38,11 +31,14 @@ bool get_item(Buffer_String *b, String *item){
   return true;
 }
 
-void IRAM_ATTR isr_boton(){
-  PARAR = true;
+void IRAM_ATTR isr_boton()
+{
+  boton_flag = true;
 }
 
-void procesarLED(String msg){
+
+
+static void procesarLED(String msg){
 
   infoln("Procesando LED: " + msg);
 
@@ -50,16 +46,20 @@ void procesarLED(String msg){
     infoln("LED ON");
     digitalWrite(PIN_LED_1, HIGH);
     digitalWrite(PIN_LED_2, HIGH);
+    digitalWrite(PIN_LED_3, LOW);
+    digitalWrite(PIN_LED_4, LOW);
   }
 
   if(msg == "APAGAR_LED"){
     infoln("LED OFF");
-    digitalWrite(PIN_LED_3, LOW);
+    digitalWrite(PIN_LED_3, HIGH);
     digitalWrite(PIN_LED_4, HIGH);
+    digitalWrite(PIN_LED_1, LOW);
+    digitalWrite(PIN_LED_2, LOW);
   }
 }
 
-void procesarLCD(String msg){
+static void procesarLCD(String msg){
 
   infoln("LCD: " + msg);
   lcd.clear();
@@ -67,24 +67,70 @@ void procesarLCD(String msg){
   lcd.print(msg);
 }
 
-String leerLuz(){
+static String leerLuz(){
 
-  int valor = analogRead(PIN_LUZ);
+  uint32_t valor = analogRead(PIN_LUZ);
 
-  if(valor > 2000){
-    infoln("MUCHA LUZ");
+  if(valor > 2000)
+  {
     return "MUCHA_LUZ";
+
+  }else if(valor < 1000)
+  {
+    return "POCA_LUZ";
+
+  }else
+  {
+  return "";
+  }
+}
+
+static String leerUltrasonidos()
+{
+  long duracion;
+  float distancia;
+
+  digitalWrite(PIN_TRIGGER, LOW);
+  delayMicroseconds(2);
+
+  digitalWrite(PIN_TRIGGER, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(PIN_TRIGGER, LOW);
+
+  duracion = pulseIn(PIN_ECHO, HIGH, 30000);
+
+  if(duracion == 0)
+  {
+    return "";
   }
 
-  if(valor < 1000){
-    infoln("POCA LUZ");
-    return "POCA_LUZ";
+  distancia = duracion * 0.034 / 2;
+
+  infoln("Valor Distancia: " + String(distancia));
+
+  static String estado = "";
+
+  if(distancia < 10)
+  {
+    if(estado != "LLENO")
+    {
+      estado = "LLENO";
+      return estado;
+    }
+  }
+  else if (distancia > 15)
+  {
+    if(estado != "VACIO")
+    {
+      estado = "VACIO";
+      return estado;
+    }
   }
 
   return "";
 }
 
-void tarea_led(void *pv){
+static void tarea_led(void *pv){
 
   Buffer_String *buf = (Buffer_String*) pv;
   String msg;
@@ -92,22 +138,52 @@ void tarea_led(void *pv){
   TickType_t xLastWakeTime = xTaskGetTickCount();
 
   infoln("Tarea LED iniciada");
+  for(;;){
 
-  while(!PARAR){
-
-    if(get_item(buf, &msg)){
-      infoln("LED msg recibido: " + msg);
-      procesarLED(msg);
+    while(boton_stop){
+      vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(TIEMPO_PAUSA));
     }
+    
+    if(get_item(buf, &msg)){
+        infoln("LED msg recibido: " + msg);
+        procesarLED(msg);
+      }
+    vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(TIEMPO_ESPERA_LED));
 
-    vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(100));
-  }
-
-  infoln("Tarea LED finalizada");
-  vTaskDelete(NULL);
+    }
 }
 
-void tarea_lcd(void *pv){
+static void tarea_ultra(void *pv){
+
+  Buffer_String *buf = (Buffer_String*) pv;
+
+  TickType_t xLastWakeTime = xTaskGetTickCount();
+
+  static String last_msg = "";
+
+  infoln("Tarea ULTRA iniciada");
+
+  for(;;)
+  {
+    while(boton_stop)
+    {
+      vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(TIEMPO_PAUSA));
+    }
+
+    String msg = leerUltrasonidos();
+
+    if(msg != "" && msg != last_msg)
+    {
+      infoln("Sensor ultrasonidos: " + msg);
+
+      put_item(buf, "ULTRA:" + msg);
+
+      last_msg = msg;
+    }
+    vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(TIEMPO_ESPERA_ULTRA));
+  }
+}
+static void tarea_lcd(void *pv){
 
   Buffer_String *buf = (Buffer_String*) pv;
   String msg;
@@ -116,62 +192,73 @@ void tarea_lcd(void *pv){
 
   infoln("Tarea LCD iniciada");
 
-  while(!PARAR){
+  for(;;){
 
-    if(get_item(buf, &msg)){
-      infoln("LCD msg recibido: " + msg);
-      procesarLCD(msg);
+    while(boton_stop)
+    {
+      vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(TIEMPO_PAUSA));
     }
-
-    vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(200));
+    if(get_item(buf, &msg))
+    {
+    infoln("LCD msg recibido: " + msg);
+    procesarLCD(msg);
+    vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(TIEMPO_ESPERA_LCD));
+    }
   }
-  infoln("Tarea LCD finalizada");
-  vTaskDelete(NULL);
 }
 
-void tarea_luz(void *pv){
+static void tarea_luz(void *pv){
 
   Buffer_String *buf = (Buffer_String*) pv;
 
   TickType_t xLastWakeTime = xTaskGetTickCount();
 
+  static String last_msg = "";
+
   infoln("Tarea LUZ iniciada");
 
-  while(!PARAR){
-
-    String msg = leerLuz();
-
-    if(msg != ""){
-      infoln("Sensor luz: " + msg);
-
-      put_item(buf, msg);
+  for(;;)
+  {
+    while(boton_stop)
+    {
+      vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(TIEMPO_PAUSA));
     }
-
-    vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(4000));
+    String msg = leerLuz();
+    if(msg != "" && msg != last_msg)
+    {
+      infoln("Sensor luz: " + msg);
+      put_item(buf, msg);
+      last_msg = msg;
+    }
+    vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(TIEMPO_ESPERA_LUZ));
   }
-  infoln("Tarea LUZ finalizada");
-  vTaskDelete(NULL);
 }
 
-void tarea_mqtt_tx(void *pv){
+static void tarea_mqtt_tx(void *pv){
 
-  Buffer_String *buf = (Buffer_String*) pv;
+  TaskBuffers *bufs = (TaskBuffers*) pv;
   String msg;
 
   TickType_t xLastWakeTime = xTaskGetTickCount();
 
   infoln("Tarea MQTT TX iniciada");
 
-  while(!PARAR){
-
-    if(get_item(buf, &msg)){
+  for(;;)
+  {
+    while(boton_stop)
+    {
+      vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(TIEMPO_PAUSA));
+    }
+    if(get_item(bufs->buffer_TX, &msg))
+    {
       infoln("MQTT TX: " + msg);
       enviarMensajePorTopic(TOPIC_PUB, msg);
     }
-
-    vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(100));
+    if(get_item(bufs->buffer_ULTRA, &msg))
+    {
+      infoln("MQTT TX: " + msg);
+      enviarMensajePorTopic(TOPIC_PUB, msg);
+    }
+    vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(TIEMPO_ESPERA_LUZ));
   }
-
-  infoln("Tarea MQTT TX finalizada");
-  vTaskDelete(NULL);
 }

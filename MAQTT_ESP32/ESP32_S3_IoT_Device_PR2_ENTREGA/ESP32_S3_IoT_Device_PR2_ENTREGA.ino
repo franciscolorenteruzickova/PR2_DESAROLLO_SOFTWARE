@@ -55,6 +55,7 @@ void setup() {
 
   // Nos conectamos al broker MQTT, indicando un 'client-id'
   mqtt_connect(deviceID);
+  delay(3000);
 
   // TODO: completar esta función (g_comunicaciones.ino)
   suscribirseATopics();

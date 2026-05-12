@@ -9,9 +9,5 @@ void screen_init(){
   Wire.begin(21, 20);
   lcd.init();
   lcd.backlight();
-  lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print(idle.line_one);
-  lcd.setCursor(0, 1);
-  lcd.print(idle.line_two);
+  current_state = idle;
 }

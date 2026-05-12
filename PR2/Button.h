@@ -5,6 +5,8 @@
 
 const int button_pin = 42;
 
+extern bool PARAR;
+
 void button_init();
 void IRAM_ATTR isr_boton();
 

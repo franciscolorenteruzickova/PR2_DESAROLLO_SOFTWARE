@@ -13,6 +13,8 @@ char keys[4][4] = {
 byte GPIORow[4] = {14, 13, 12, 11};
 byte GPIOColumn[4] = {10, 9, 46, 3};
 
+const char password[16] = "0123456789";
+
 Keypad KeyBoard = Keypad(makeKeymap(keys), GPIORow, GPIOColumn, 4, 4);
 
 /*

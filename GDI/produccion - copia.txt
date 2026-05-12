@@ -1,0 +1,167 @@
+El esquema relacional de esta base de datos es el siguiente:
+
+PROVEEDORES (código: varchar(10), CIF: varchar(9), calle: char(30), número: int, población: char(50), cód_postal: char(50), email: varchar(50), cód_compra: varchar(10))
+CP: {código}
+Uni: {CIF}
+VNN: {calle, número, población, cód_postal, email, cód_compra}
+CAj: {cód_compra} → COMPRA(código)
+
+TELEFONOS_PROV (código: varchar(10), telefonos: varchar(9))
+CP: {código, telefonos}
+CAj: {código} → PROVEEDORES
+
+COMPRA (código: varchar(10), fecha_compra: date, precio: char(10))
+CP: {código}
+VNN: {fecha_compra, precio}
+
+CANTIDAD_COMPRA (código: varchar(10), cantidad: int)
+CP: {código, cantidad}
+CAj: {código} → COMPRA
+RI1: Todo valor que aparezca en el atributo código de COMPRA debe aparecer en el atributo código de COMPRA
+
+PALILLO (código: varchar(10), forma: varchar(30), material_madera: varchar(30), grabado: varchar(30),
+cód_compra: varchar(10), cód_stock: varchar(10), cód_serigrafiado: varchar(10), cód_proceso: varchar(10))
+CP: {código}
+VNN: {forma, material_madera, grabado, cód_proceso}
+Check: forma ∈ {'alargado','ovalado','pequeño'}
+Check: material_madera ∈ {'reciclado','roble','pino','cerezo'}
+Check: grabado ∈ {'estándar','decorativo'}
+CAj: {cód_compra} → COMPRA(código)
+CAj: {cód_stock} → STOCK(código)
+CAj: {cód_serigrafiado} → SERIGRAFIADO(código)
+CAj: {cód_proceso} → PRODUCCIÓN
+RI1: Todo valor de código en SERIGRAFIADO debe aparecer en cód_serigrafiado de PALILLO
+RI1: Todo valor de cód_proceso en PRODUCCIÓN debe aparecer en cód_proceso de PALILLO
+
+STOCK (código: varchar(10), cantidad: int, fecha_actualización: date)
+CP: {código}
+VNN: {cantidad, fecha_actualización}
+
+SERIGRAFIADO (código: varchar(10), letra: varchar(10), tamaño: varchar(20), título: char(10),
+símbolo: char(20), cód_cliente: varchar(10), fecha_venta: date, cantidad: int, precio: char(10),
+valoración: varchar(30), cód_robot: varchar(10))
+CP: {código}
+VNN: {título, símbolo, fecha_venta, cantidad, precio, valoración, cód_robot, letra, tamaño}
+Check: letra ∈ {'arial','times','robotic','nova'}
+Check: tamaño ∈ {'grande','mediano','pequeño'}
+Check: valoración ∈ {'excelente','satisfecho','buena','regular','mala'}
+CAj: {cód_cliente} → CLIENTES(código)
+CAj: {cód_robot} → ROBOT
+RI1: Todo valor de cód_robot en ROBOT debe aparecer en cód_robot de SERIGRAFIADO
+
+CLIENTES (código: varchar(10), dni: varchar(9), calle: char(30), número: int, población: char(50),
+cód_postal: char(50), email: varchar(50))
+CP: {código}
+Uni: {dni}
+VNN: {calle, número, población, cód_postal, email}
+
+TELEFONOS_CLIEN (código: varchar(10), telefonos: varchar(9))
+CP: {código, telefonos}
+CAj: {código} → CLIENTES
+
+PRODUCCIÓN (cód_proceso: varchar(10), fecha_inicio: date, fecha_fin: date, estado: varchar(30))
+CP: {cód_proceso}
+VNN: {fecha_inicio, fecha_fin, estado}
+Check: estado ∈ {'en_curso','finalizado','error'}
+
+INTERVENCION_ROBOT (cód_proceso: varchar(10), tiempo_inicio: date, tiempo_fin: date, tarea: varchar(30),
+cód_producción: varchar(10), cód_robot: varchar(10))
+CP: {cód_proceso}
+VNN: {tiempo_inicio, tiempo_fin, tarea, cód_producción, cód_robot}
+Check: tarea ∈ {'clasificar','transportar','serigrafiar','desechar'}
+CAj: {cód_producción} → PRODUCCIÓN(cód_proceso)
+CAj: {cód_robot} → ROBOT
+RI1: Todo valor de cód_proceso en PRODUCCIÓN debe aparecer en cód_producción de INTERVENCIÓN_ROBOT
+RI1: Todo valor de cód_robot en ROBOT debe aparecer en cód_robot de INTERVENCIÓN_ROBOT
+
+ROBOT (cód_robot: varchar(10), tipo: varchar(20), modelo: varchar(20), estado: varchar(20),
+fecha_mantenimiento: date)
+CP: {cód_robot}
+VNN: {tipo, modelo, estado, fecha_mantenimiento}
+Check: tipo ∈ {'delta', 'ur3e'}
+Check: estado ∈ {'activo', 'mantenimiento', 'error'}
+
+--------------------------------------------
+DESCRIPCIÓN DE ATRIBUTOS
+--------------------------------------------
+
+PROVEEDORES:
+- código: Identificador único del proveedor.
+- CIF: Código de identificación fiscal del proveedor.
+- calle: Calle donde se ubica el proveedor.
+- número: Número de la dirección del proveedor.
+- población: Ciudad o localidad del proveedor.
+- cód_postal: Código postal del proveedor.
+- email: Correo electrónico del proveedor.
+- cód_compra: Código de la compra asociada al proveedor.
+
+TELEFONOS_PROV:
+- código: Código del proveedor.
+- telefonos: Número de teléfono del proveedor.
+
+COMPRA:
+- código: Identificador único de la compra.
+- fecha_compra: Fecha de la compra.
+- precio: Precio total.
+
+CANTIDAD_COMPRA:
+- código: Código de la compra.
+- cantidad: Cantidad asociada.
+
+PALILLO:
+- código: Identificador del palillo.
+- forma: alargado, ovalado o pequeño.
+- material_madera: reciclado, roble, pino o cerezo.
+- grabado: estándar o decorativo.
+- cód_compra: compra asociada.
+- cód_stock: stock asociado.
+- cód_serigrafiado: diseño asociado.
+- cód_proceso: proceso de producción.
+
+STOCK:
+- código: Identificador del stock.
+- cantidad: unidades disponibles.
+- fecha_actualización: última actualización.
+
+SERIGRAFIADO:
+- código: Identificador del diseño.
+- letra: arial, times, robotic o nova.
+- tamaño: grande, mediano o pequeño.
+- título: título del diseño.
+- símbolo: símbolo del diseño.
+- cód_cliente: cliente asociado.
+- fecha_venta: fecha de venta.
+- cantidad: unidades vendidas.
+- precio: precio de venta.
+- valoración: excelente, satisfecho, buena, regular o mala.
+- cód_robot: robot asociado.
+
+CLIENTES:
+- código: Identificador del cliente.
+- dni: DNI único.
+- calle, número, población, cód_postal, email: datos de contacto.
+
+TELEFONOS_CLIEN:
+- código: cliente.
+- telefonos: número de contacto.
+
+PRODUCCIÓN:
+- cód_proceso: identificador del proceso.
+- fecha_inicio: inicio.
+- fecha_fin: fin.
+- estado: en_curso, finalizado o error.
+
+ROBOT:
+- cód_robot: identificador.
+- tipo: delta o ur3.
+- modelo: modelo del robot.
+- estado: activo, mantenimiento o error.
+- fecha_mantenimiento: última revisión.
+
+INTERVENCION_ROBOT:
+- cód_proceso: proceso.
+- tiempo_inicio: inicio de intervención.
+- tiempo_fin: fin.
+- tarea: clasificar, transportar, serigrafiar o desechar.
+- cód_producción: proceso asociado.
+- cód_robot: robot que interviene.

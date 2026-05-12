@@ -176,7 +176,7 @@ static void tarea_ultra(void *pv){
     {
       infoln("Sensor ultrasonidos: " + msg);
 
-      put_item(buf, "ULTRA:" + msg);
+      put_item(buf, msg);
 
       last_msg = msg;
     }

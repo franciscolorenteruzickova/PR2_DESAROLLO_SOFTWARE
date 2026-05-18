@@ -1,5 +1,6 @@
 import psycopg
 import random
+import uuid
 
 
 def conectar():
@@ -7,7 +8,7 @@ def conectar():
         dbname="palillo",
         user="postgres",
         password="postgres",
-        host="localhost",
+        host="127.0.0.1",
         port="5432"
     )
     conn.execute("SET search_path TO produccion_palillos;")
@@ -21,7 +22,7 @@ def crear_proceso_y_palillo():
     # ==========================
     # 1. CREAR PROCESO
     # ==========================
-    codigo_proceso = f"PR{random.randint(1000, 9999)}"
+    codigo_proceso = f"PR{uuid.uuid4().hex[:8]}"
     estado = random.choice(["en_curso", "finalizado", "error"])
 
     sql_proceso = """
@@ -39,7 +40,7 @@ def crear_proceso_y_palillo():
     # ==========================
     # 2. CREAR PALILLO ASOCIADO
     # ==========================
-    codigo_palillo = f"PL{random.randint(1000, 9999)}"
+    codigo_palillo = f"PL{uuid.uuid4().hex[:8]}"
 
     sql_palillo = """
     INSERT INTO palillo (codigo, forma, material_madera, grabado, cod_proceso)
@@ -51,7 +52,7 @@ def crear_proceso_y_palillo():
         random.choice(["alargado", "ovalado", "pequeño"]),
         random.choice(["roble", "pino", "cerezo", "reciclado"]),
         "estandar",
-        codigo_proceso   # 👈 MISMO PROCESO
+        codigo_proceso
     ))
 
     conn.commit()

@@ -2,6 +2,7 @@ void suscribirseATopics() {
   
   // TODO: añadir suscripciones a los topics MQTT ...
   mqtt_subscribe(TOPIC_SUB_LED);
+  mqtt_subscribe(TOPIC_SUB_LED_SALIDA);
   mqtt_subscribe(TOPIC_SUB_LCD);
 
 
@@ -21,6 +22,9 @@ void alRecibirMensajePorTopic(char* topic, String incomingMessage) {
     // Enviamos a los buffers (arquitectura concurrente)
     put_item(&buffer_LED, incomingMessage);
   } 
+  else if (strcmp(topic, TOPIC_SUB_LED_SALIDA) == 0) {
+    put_item(&buffer_LED_SALIDA, incomingMessage);
+  }
   else if (strcmp(topic, TOPIC_SUB_LCD) == 0) {
     put_item(&buffer_LCD, incomingMessage);
 

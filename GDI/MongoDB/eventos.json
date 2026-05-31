@@ -1,0 +1,62 @@
+[
+  {
+    "_id": "E001",
+    "tipo": "Inicio",
+    "descripcion": "Inicio del turno de producción",
+    "timestamp": "2026-05-26T08:00:00Z"
+  },
+  {
+    "_id": "E002",
+    "tipo": "Calibracion",
+    "descripcion": "Calibración inicial del sensor ultrasónico",
+    "timestamp": "2026-05-26T08:15:00Z"
+  },
+  {
+    "_id": "E003",
+    "tipo": "Calibracion",
+    "descripcion": "Ajuste de la sensibilidad del sensor LDR",
+    "timestamp": "2026-05-26T08:30:00Z"
+  },
+  {
+    "_id": "E004",
+    "tipo": "Error",
+    "descripcion": "Fallo temporal de comunicación MQTT",
+    "timestamp": "2026-05-26T09:10:00Z"
+  },
+  {
+    "_id": "E005",
+    "tipo": "Reinicio",
+    "descripcion": "Reinicio automático de la aplicación Python tras error",
+    "timestamp": "2026-05-26T09:15:00Z"
+  },
+  {
+    "_id": "E006",
+    "tipo": "Mantenimiento",
+    "descripcion": "Inspección preventiva de la cinta de entrada",
+    "timestamp": "2026-05-26T09:45:00Z"
+  },
+  {
+    "_id": "E007",
+    "tipo": "Alerta",
+    "descripcion": "Aviso generado por detección irregular en sensor infrarrojo",
+    "timestamp": "2026-05-26T10:10:00Z"
+  },
+  {
+    "_id": "E008",
+    "tipo": "Error",
+    "descripcion": "Lectura incoherente recibida desde el sensor de temperatura",
+    "timestamp": "2026-05-26T10:30:00Z"
+  },
+  {
+    "_id": "E009",
+    "tipo": "Reinicio",
+    "descripcion": "Reinicio manual desde pulsador físico",
+    "timestamp": "2026-05-26T11:00:00Z"
+  },
+  {
+    "_id": "E010",
+    "tipo": "Fin",
+    "descripcion": "Finalización del turno de producción",
+    "timestamp": "2026-05-26T14:00:00Z"
+  }
+]

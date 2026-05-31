@@ -1,0 +1,122 @@
+[
+  {
+    "_id": "A001",
+    "sensor_id": "S001",
+    "timestamp": "2026-05-26T10:10:00Z",
+    "mensaje": "Distancia superior al rango permitido",
+    "prioridad": "Alta",
+    "estado": "Activa"
+  },
+  {
+    "_id": "A002",
+    "sensor_id": "S001",
+    "timestamp": "2026-05-26T10:25:00Z",
+    "mensaje": "Distancia inestable en cinta de salida",
+    "prioridad": "Media",
+    "estado": "Resuelta"
+  },
+  {
+    "_id": "A003",
+    "sensor_id": "S001",
+    "timestamp": "2026-05-26T10:45:00Z",
+    "mensaje": "Objeto demasiado alejado del sensor",
+    "prioridad": "Alta",
+    "estado": "Activa"
+  },
+  {
+    "_id": "A004",
+    "sensor_id": "S002",
+    "timestamp": "2026-05-26T10:05:00Z",
+    "mensaje": "Nivel de iluminación excesivo",
+    "prioridad": "Media",
+    "estado": "Activa"
+  },
+  {
+    "_id": "A005",
+    "sensor_id": "S002",
+    "timestamp": "2026-05-26T10:25:00Z",
+    "mensaje": "Variación brusca de luminosidad",
+    "prioridad": "Baja",
+    "estado": "Resuelta"
+  },
+  {
+    "_id": "A006",
+    "sensor_id": "S002",
+    "timestamp": "2026-05-26T10:45:00Z",
+    "mensaje": "Lectura LDR fuera del rango esperado",
+    "prioridad": "Media",
+    "estado": "Activa"
+  },
+  {
+    "_id": "A007",
+    "sensor_id": "S003",
+    "timestamp": "2026-05-26T10:10:00Z",
+    "mensaje": "Objeto no detectado en cinta de entrada",
+    "prioridad": "Alta",
+    "estado": "Activa"
+  },
+  {
+    "_id": "A008",
+    "sensor_id": "S003",
+    "timestamp": "2026-05-26T10:25:00Z",
+    "mensaje": "Pérdida temporal de señal infrarroja",
+    "prioridad": "Alta",
+    "estado": "Activa"
+  },
+  {
+    "_id": "A009",
+    "sensor_id": "S003",
+    "timestamp": "2026-05-26T10:45:00Z",
+    "mensaje": "Fallo de detección repetido",
+    "prioridad": "Alta",
+    "estado": "Resuelta"
+  },
+  {
+    "_id": "A010",
+    "sensor_id": "S004",
+    "timestamp": "2026-05-26T10:20:00Z",
+    "mensaje": "Temperatura elevada en estación",
+    "prioridad": "Media",
+    "estado": "Activa"
+  },
+  {
+    "_id": "A011",
+    "sensor_id": "S004",
+    "timestamp": "2026-05-26T10:30:00Z",
+    "mensaje": "Temperatura fuera del rango de operación",
+    "prioridad": "Alta",
+    "estado": "Activa"
+  },
+  {
+    "_id": "A012",
+    "sensor_id": "S004",
+    "timestamp": "2026-05-26T10:45:00Z",
+    "mensaje": "Incremento progresivo de temperatura",
+    "prioridad": "Media",
+    "estado": "Resuelta"
+  },
+  {
+    "_id": "A013",
+    "sensor_id": "S005",
+    "timestamp": "2026-05-26T10:05:00Z",
+    "mensaje": "Pulsación manual registrada durante operación",
+    "prioridad": "Baja",
+    "estado": "Resuelta"
+  },
+  {
+    "_id": "A014",
+    "sensor_id": "S005",
+    "timestamp": "2026-05-26T10:20:00Z",
+    "mensaje": "Activación inesperada del pulsador",
+    "prioridad": "Media",
+    "estado": "Activa"
+  },
+  {
+    "_id": "A015",
+    "sensor_id": "S005",
+    "timestamp": "2026-05-26T10:45:00Z",
+    "mensaje": "Pulsador activado fuera de secuencia",
+    "prioridad": "Media",
+    "estado": "Activa"
+  }
+]

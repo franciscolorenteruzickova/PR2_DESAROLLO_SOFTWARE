@@ -3,6 +3,7 @@
 
 TaskHandle_t lcd_task_handle = NULL;
 TaskHandle_t led_task_handle = NULL;
+TaskHandle_t led_salida_task_handle = NULL;
 TaskHandle_t tx_task_handle = NULL;
 TaskHandle_t luz_task_handle = NULL;
 TaskHandle_t ultra_task_handle = NULL;
@@ -16,8 +17,8 @@ void on_setup() {
     infoln("Inicializando hardware");
     pinMode(PIN_LED_1, OUTPUT);
     pinMode(PIN_LED_2, OUTPUT);
-    pinMode(PIN_LED_3, OUTPUT);
-    pinMode(PIN_LED_4, OUTPUT);
+    pinMode(PIN_LED_SALIDA_3, OUTPUT);
+    pinMode(PIN_LED_SALIDA_4, OUTPUT);
     pinMode(PIN_LUZ, INPUT);
     pinMode(PIN_TRIGGER, OUTPUT);
     pinMode(PIN_ECHO, INPUT);
@@ -43,6 +44,7 @@ void on_setup() {
 
     buffer_LED.mux = portMUX_INITIALIZER_UNLOCKED;
     buffer_LCD.mux = portMUX_INITIALIZER_UNLOCKED;
+    buffer_LED_SALIDA.mux = portMUX_INITIALIZER_UNLOCKED;
     buffer_TX.mux  = portMUX_INITIALIZER_UNLOCKED;
     buffer_ULTRA.mux = portMUX_INITIALIZER_UNLOCKED;
 
@@ -52,6 +54,8 @@ void on_setup() {
     infoln("Creando tareas FreeRTOS");
 
     xTaskCreatePinnedToCore(tarea_led, "LED", 6144, &buffer_LED, TAREA_LED_TASK_PRIORITY, &led_task_handle, 1);
+    
+    xTaskCreatePinnedToCore(tarea_led_salida, "LED SALIDA", 6144, &buffer_LED_SALIDA, TAREA_LED_SALIDA_TASK_PRIORITY, &led_salida_task_handle, 0);
 
     xTaskCreatePinnedToCore(tarea_lcd, "LCD", 6144, &buffer_LCD, TAREA_LCD_TASK_PRIORITY, &lcd_task_handle, 1);
 

@@ -21,6 +21,7 @@
 //#define MQTT_PASSWORD             "UPV2024"
 #define TOPIC_SUB_LCD               "giirob/pr2/devices/input/lcd"   // topic para leer el texto que le llega a la lcd
 #define TOPIC_SUB_LED               "giirob/pr2/devices/input/led"   // topic para leer el texto que le llega a los leds
+#define TOPIC_SUB_LED_SALIDA         "giirob/pr2/devices/input/led2"  // topic para leer el texto que le llega a el led de salida
 #define TOPIC_PUB                   "giirob/pr2/devices/output"      //  topic para enviar los datos de la ldr
 
 // MENSAJES
@@ -37,6 +38,7 @@
 
 #define TAREA_LCD_TASK_PRIORITY     1
 #define TAREA_LED_TASK_PRIORITY     1
+#define TAREA_LED_SALIDA_TASK_PRIORITY 1
 #define TAREA_LUZ_TASK_PRIORITY     1
 #define TAREA_TX_TASK_PRIORITY      1
 #define TAREA_ULTRA_TASK_PRIORITY   1
@@ -44,8 +46,8 @@
 // IO
 #define PIN_LED_1               4
 #define PIN_LED_2               5
-#define PIN_LED_3               16
-#define PIN_LED_4               17
+#define PIN_LED_SALIDA_3               16
+#define PIN_LED_SALIDA_4               17
 #define PIN_BOTON             18
 #define PIN_LUZ               10
 #define PIN_SDA               21
@@ -56,6 +58,7 @@
 
 extern TaskHandle_t lcd_task_handle;
 extern TaskHandle_t led_task_handle;
+extern TaskHandle_t led_salida_task_handle;
 extern TaskHandle_t tx_task_handle;
 extern TaskHandle_t luz_task_handle;
 extern TaskHandle_t ultra_task_handle;
@@ -78,6 +81,7 @@ struct TaskBuffers {
 TaskBuffers buffers_mqtt;
 
 Buffer_String buffer_LED;
+Buffer_String buffer_LED_SALIDA;
 Buffer_String buffer_LCD;
 Buffer_String buffer_TX;
 Buffer_String buffer_ULTRA;

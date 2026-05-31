@@ -1,0 +1,37 @@
+[
+  {
+    "_id": "S001",
+    "tipo": "Ultrasonidos",
+    "ubicacion": "Cinta salida",
+    "estado": "Activo",
+    "fecha_instalacion": "2026-05-20"
+  },
+  {
+    "_id": "S002",
+    "tipo": "LDR",
+    "ubicacion": "Cámara IA",
+    "estado": "Activo",
+    "fecha_instalacion": "2026-04-15"
+  },
+  {
+    "_id": "S003",
+    "tipo": "Infrarrojos",
+    "ubicacion": "Cinta entrada",
+    "estado": "Activo",
+    "fecha_instalacion": "2025-11-10"
+  },
+  {
+    "_id": "S004",
+    "tipo": "Temperatura",
+    "ubicacion": "Estación",
+    "estado": "Activo",
+    "fecha_instalacion": "2026-01-08"
+  },
+  {
+    "_id": "S005",
+    "tipo": "Pulsador",
+    "ubicacion": "Estación",
+    "estado": "Activo",
+    "fecha_instalacion": "2026-01-08"
+  }
+]

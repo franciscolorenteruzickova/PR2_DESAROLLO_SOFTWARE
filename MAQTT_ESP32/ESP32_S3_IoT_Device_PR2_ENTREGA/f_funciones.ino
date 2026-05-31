@@ -45,17 +45,30 @@ static void procesarLED(String msg){
   if(msg == "ENCENDER_LED"){
     infoln("LED ON");
     digitalWrite(PIN_LED_1, HIGH);
-    digitalWrite(PIN_LED_2, HIGH);
-    digitalWrite(PIN_LED_3, LOW);
-    digitalWrite(PIN_LED_4, LOW);
+    digitalWrite(PIN_LED_2, LOW);
   }
 
   if(msg == "APAGAR_LED"){
     infoln("LED OFF");
-    digitalWrite(PIN_LED_3, HIGH);
-    digitalWrite(PIN_LED_4, HIGH);
     digitalWrite(PIN_LED_1, LOW);
-    digitalWrite(PIN_LED_2, LOW);
+    digitalWrite(PIN_LED_2, HIGH);
+  }
+}
+
+static void procesarLEDSALIDA(String msg){
+
+  infoln("Procesando LED: " + msg);
+
+  if(msg == "ENCENDER_LED"){
+    infoln("LED ON");
+    digitalWrite(PIN_LED_SALIDA_3, HIGH);
+    digitalWrite(PIN_LED_SALIDA_4, LOW);
+  }
+
+  if(msg == "APAGAR_LED"){
+    infoln("LED OFF");
+    digitalWrite(PIN_LED_SALIDA_3, LOW);
+    digitalWrite(PIN_LED_SALIDA_4, HIGH);
   }
 }
 
@@ -87,24 +100,42 @@ static String leerLuz(){
 
 static String leerUltrasonidos()
 {
-  long duracion;
-  float distancia;
+  float suma = 0;
+  int validas = 0;
 
-  digitalWrite(PIN_TRIGGER, LOW);
-  delayMicroseconds(2);
+  for(int i = 0; i < 3; i++)
+  {
+    digitalWrite(PIN_TRIGGER, LOW);
+    delayMicroseconds(5);
 
-  digitalWrite(PIN_TRIGGER, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(PIN_TRIGGER, LOW);
+    digitalWrite(PIN_TRIGGER, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(PIN_TRIGGER, LOW);
 
-  duracion = pulseIn(PIN_ECHO, HIGH, 30000);
+    long duracion = pulseIn(PIN_ECHO, HIGH, 30000);
 
-  if(duracion == 0)
+    if(duracion == 0)
+    {
+      continue;
+    }
+
+    float distancia = duracion * 0.0343 / 2;
+
+    if(distancia >= 2 && distancia <= 400)
+    {
+      suma += distancia;
+      validas++;
+    }
+
+    delay(20);
+  }
+
+  if(validas == 0)
   {
     return "";
   }
 
-  distancia = duracion * 0.034 / 2;
+  float distancia = suma / validas;
 
   infoln("Valor Distancia: " + String(distancia));
 
@@ -118,7 +149,7 @@ static String leerUltrasonidos()
       return estado;
     }
   }
-  else if (distancia > 15)
+  else if(distancia > 15)
   {
     if(estado != "VACIO")
     {
@@ -147,6 +178,29 @@ static void tarea_led(void *pv){
     if(get_item(buf, &msg)){
         infoln("LED msg recibido: " + msg);
         procesarLED(msg);
+      }
+    vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(TIEMPO_ESPERA_LED));
+
+    }
+}
+
+static void tarea_led_salida(void *pv){
+
+  Buffer_String *buf = (Buffer_String*) pv;
+  String msg;
+  
+  TickType_t xLastWakeTime = xTaskGetTickCount();
+
+  infoln("Tarea LED SALIDA iniciada");
+  for(;;){
+
+    while(boton_stop){
+      vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(TIEMPO_PAUSA));
+    }
+    
+    if(get_item(buf, &msg)){
+        infoln("LED SALIDA msg recibido: " + msg);
+        procesarLEDSALIDA(msg);
       }
     vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(TIEMPO_ESPERA_LED));
 

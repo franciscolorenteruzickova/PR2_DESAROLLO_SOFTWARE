@@ -1,0 +1,352 @@
+[
+  {
+    "_id": "L001",
+    "sensor_id": "S001",
+    "timestamp": "2026-05-26T10:00:00Z",
+    "valor": 24.5,
+    "unidad": "cm"
+  },
+  {
+    "_id": "L002",
+    "sensor_id": "S001",
+    "timestamp": "2026-05-26T10:05:00Z",
+    "valor": 25.1,
+    "unidad": "cm"
+  },
+  {
+    "_id": "L003",
+    "sensor_id": "S001",
+    "timestamp": "2026-05-26T10:10:00Z",
+    "valor": 26.3,
+    "unidad": "cm"
+  },
+  {
+    "_id": "L004",
+    "sensor_id": "S001",
+    "timestamp": "2026-05-26T10:15:00Z",
+    "valor": 23.8,
+    "unidad": "cm"
+  },
+  {
+    "_id": "L005",
+    "sensor_id": "S001",
+    "timestamp": "2026-05-26T10:20:00Z",
+    "valor": 24.9,
+    "unidad": "cm"
+  },
+  {
+    "_id": "L006",
+    "sensor_id": "S001",
+    "timestamp": "2026-05-26T10:25:00Z",
+    "valor": 27.5,
+    "unidad": "cm"
+  },
+  {
+    "_id": "L007",
+    "sensor_id": "S001",
+    "timestamp": "2026-05-26T10:30:00Z",
+    "valor": 22.7,
+    "unidad": "cm"
+  },
+  {
+    "_id": "L008",
+    "sensor_id": "S001",
+    "timestamp": "2026-05-26T10:35:00Z",
+    "valor": 25.6,
+    "unidad": "cm"
+  },
+  {
+    "_id": "L009",
+    "sensor_id": "S001",
+    "timestamp": "2026-05-26T10:40:00Z",
+    "valor": 24.1,
+    "unidad": "cm"
+  },
+  {
+    "_id": "L010",
+    "sensor_id": "S001",
+    "timestamp": "2026-05-26T10:45:00Z",
+    "valor": 28.2,
+    "unidad": "cm"
+  },
+  {
+    "_id": "L011",
+    "sensor_id": "S002",
+    "timestamp": "2026-05-26T10:00:00Z",
+    "valor": 580,
+    "unidad": "lux"
+  },
+  {
+    "_id": "L012",
+    "sensor_id": "S002",
+    "timestamp": "2026-05-26T10:05:00Z",
+    "valor": 620,
+    "unidad": "lux"
+  },
+  {
+    "_id": "L013",
+    "sensor_id": "S002",
+    "timestamp": "2026-05-26T10:10:00Z",
+    "valor": 605,
+    "unidad": "lux"
+  },
+  {
+    "_id": "L014",
+    "sensor_id": "S002",
+    "timestamp": "2026-05-26T10:15:00Z",
+    "valor": 590,
+    "unidad": "lux"
+  },
+  {
+    "_id": "L015",
+    "sensor_id": "S002",
+    "timestamp": "2026-05-26T10:20:00Z",
+    "valor": 575,
+    "unidad": "lux"
+  },
+  {
+    "_id": "L016",
+    "sensor_id": "S002",
+    "timestamp": "2026-05-26T10:25:00Z",
+    "valor": 640,
+    "unidad": "lux"
+  },
+  {
+    "_id": "L017",
+    "sensor_id": "S002",
+    "timestamp": "2026-05-26T10:30:00Z",
+    "valor": 610,
+    "unidad": "lux"
+  },
+  {
+    "_id": "L018",
+    "sensor_id": "S002",
+    "timestamp": "2026-05-26T10:35:00Z",
+    "valor": 598,
+    "unidad": "lux"
+  },
+  {
+    "_id": "L019",
+    "sensor_id": "S002",
+    "timestamp": "2026-05-26T10:40:00Z",
+    "valor": 615,
+    "unidad": "lux"
+  },
+  {
+    "_id": "L020",
+    "sensor_id": "S002",
+    "timestamp": "2026-05-26T10:45:00Z",
+    "valor": 630,
+    "unidad": "lux"
+  },
+  {
+    "_id": "L021",
+    "sensor_id": "S003",
+    "timestamp": "2026-05-26T10:00:00Z",
+    "valor": 1,
+    "unidad": "deteccion"
+  },
+  {
+    "_id": "L022",
+    "sensor_id": "S003",
+    "timestamp": "2026-05-26T10:05:00Z",
+    "valor": 1,
+    "unidad": "deteccion"
+  },
+  {
+    "_id": "L023",
+    "sensor_id": "S003",
+    "timestamp": "2026-05-26T10:10:00Z",
+    "valor": 0,
+    "unidad": "deteccion"
+  },
+  {
+    "_id": "L024",
+    "sensor_id": "S003",
+    "timestamp": "2026-05-26T10:15:00Z",
+    "valor": 1,
+    "unidad": "deteccion"
+  },
+  {
+    "_id": "L025",
+    "sensor_id": "S003",
+    "timestamp": "2026-05-26T10:20:00Z",
+    "valor": 1,
+    "unidad": "deteccion"
+  },
+  {
+    "_id": "L026",
+    "sensor_id": "S003",
+    "timestamp": "2026-05-26T10:25:00Z",
+    "valor": 0,
+    "unidad": "deteccion"
+  },
+  {
+    "_id": "L027",
+    "sensor_id": "S003",
+    "timestamp": "2026-05-26T10:30:00Z",
+    "valor": 1,
+    "unidad": "deteccion"
+  },
+  {
+    "_id": "L028",
+    "sensor_id": "S003",
+    "timestamp": "2026-05-26T10:35:00Z",
+    "valor": 1,
+    "unidad": "deteccion"
+  },
+  {
+    "_id": "L029",
+    "sensor_id": "S003",
+    "timestamp": "2026-05-26T10:40:00Z",
+    "valor": 1,
+    "unidad": "deteccion"
+  },
+  {
+    "_id": "L030",
+    "sensor_id": "S003",
+    "timestamp": "2026-05-26T10:45:00Z",
+    "valor": 0,
+    "unidad": "deteccion"
+  },
+  {
+    "_id": "L031",
+    "sensor_id": "S004",
+    "timestamp": "2026-05-26T10:00:00Z",
+    "valor": 22.5,
+    "unidad": "ºC"
+  },
+  {
+    "_id": "L032",
+    "sensor_id": "S004",
+    "timestamp": "2026-05-26T10:05:00Z",
+    "valor": 23.1,
+    "unidad": "ºC"
+  },
+  {
+    "_id": "L033",
+    "sensor_id": "S004",
+    "timestamp": "2026-05-26T10:10:00Z",
+    "valor": 22.8,
+    "unidad": "ºC"
+  },
+  {
+    "_id": "L034",
+    "sensor_id": "S004",
+    "timestamp": "2026-05-26T10:15:00Z",
+    "valor": 23.4,
+    "unidad": "ºC"
+  },
+  {
+    "_id": "L035",
+    "sensor_id": "S004",
+    "timestamp": "2026-05-26T10:20:00Z",
+    "valor": 24.2,
+    "unidad": "ºC"
+  },
+  {
+    "_id": "L036",
+    "sensor_id": "S004",
+    "timestamp": "2026-05-26T10:25:00Z",
+    "valor": 25.8,
+    "unidad": "ºC"
+  },
+  {
+    "_id": "L037",
+    "sensor_id": "S004",
+    "timestamp": "2026-05-26T10:30:00Z",
+    "valor": 23.7,
+    "unidad": "ºC"
+  },
+  {
+    "_id": "L038",
+    "sensor_id": "S004",
+    "timestamp": "2026-05-26T10:35:00Z",
+    "valor": 22.9,
+    "unidad": "ºC"
+  },
+  {
+    "_id": "L039",
+    "sensor_id": "S004",
+    "timestamp": "2026-05-26T10:40:00Z",
+    "valor": 24.8,
+    "unidad": "ºC"
+  },
+  {
+    "_id": "L040",
+    "sensor_id": "S004",
+    "timestamp": "2026-05-26T10:45:00Z",
+    "valor": 26.1,
+    "unidad": "ºC"
+  },
+  {
+    "_id": "L041",
+    "sensor_id": "S005",
+    "timestamp": "2026-05-26T10:00:00Z",
+    "valor": 0,
+    "unidad": "estado"
+  },
+  {
+    "_id": "L042",
+    "sensor_id": "S005",
+    "timestamp": "2026-05-26T10:05:00Z",
+    "valor": 1,
+    "unidad": "estado"
+  },
+  {
+    "_id": "L043",
+    "sensor_id": "S005",
+    "timestamp": "2026-05-26T10:10:00Z",
+    "valor": 0,
+    "unidad": "estado"
+  },
+  {
+    "_id": "L044",
+    "sensor_id": "S005",
+    "timestamp": "2026-05-26T10:15:00Z",
+    "valor": 0,
+    "unidad": "estado"
+  },
+  {
+    "_id": "L045",
+    "sensor_id": "S005",
+    "timestamp": "2026-05-26T10:20:00Z",
+    "valor": 1,
+    "unidad": "estado"
+  },
+  {
+    "_id": "L046",
+    "sensor_id": "S005",
+    "timestamp": "2026-05-26T10:25:00Z",
+    "valor": 0,
+    "unidad": "estado"
+  },
+  {
+    "_id": "L047",
+    "sensor_id": "S005",
+    "timestamp": "2026-05-26T10:30:00Z",
+    "valor": 1,
+    "unidad": "estado"
+  },
+  {
+    "_id": "L048",
+    "sensor_id": "S005",
+    "timestamp": "2026-05-26T10:35:00Z",
+    "valor": 0,
+    "unidad": "estado"
+  },
+  {
+    "_id": "L049",
+    "sensor_id": "S005",
+    "timestamp": "2026-05-26T10:40:00Z",
+    "valor": 0,
+    "unidad": "estado"
+  },
+  {
+    "_id": "L050",
+    "sensor_id": "S005",
+    "timestamp": "2026-05-26T10:45:00Z",
+    "valor": 1,
+    "unidad": "estado"
+  }
+]

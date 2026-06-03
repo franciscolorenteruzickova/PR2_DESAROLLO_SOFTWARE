@@ -22,10 +22,10 @@ void alRecibirMensajePorTopic(char* topic, String incomingMessage) {
     // Enviamos a los buffers (arquitectura concurrente)
     put_item(&buffer_LED, incomingMessage);
   } 
-  else if (strcmp(topic, TOPIC_SUB_LED_SALIDA) == 0) {
+  else if (strcmp(topic, TOPIC_SUB_LED_SALIDA) == 0) { // Topic de la cinta de salida
     put_item(&buffer_LED_SALIDA, incomingMessage);
   }
-  else if (strcmp(topic, TOPIC_SUB_LCD) == 0) {
+  else if (strcmp(topic, TOPIC_SUB_LCD) == 0) { // Topic de la pantalla LCD
     put_item(&buffer_LCD, incomingMessage);
 
   } else {

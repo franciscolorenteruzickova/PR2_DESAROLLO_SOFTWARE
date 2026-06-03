@@ -1,7 +1,7 @@
 /*
  * Grado GIIROB
  * Asignatura PR2
- * Joan Fons (jjfons@dsic.upv.es)
+ * Francisco Lorente Ruzickova
  * Curso 2023/24
  *
  * Plantilla Dispositivo IoT
